@@ -46,13 +46,13 @@ The shared framework should own those mechanisms, while each game repo still def
 
 ## Current Scope Boundary
 
-The shared framework currently owns only genuinely reusable runtime infrastructure.
+The shared framework currently owns genuinely reusable runtime infrastructure plus a small set of host and engine helpers that are project-agnostic.
 
 It intentionally does not own:
 
 - any game-specific exported gameplay ABI
 - any game-specific host bridge or DLL session wrapper
-- any game-specific Godot adapter, notification schema, or projection contract
+- any game-specific Godot adapter, notification schema, projection contract, or command semantics
 
 Earlier GS1-derived host and Godot extractions were removed after it became clear they still encoded GS1-specific gameplay commands, state views, DLL names, resource paths, and presentation contracts. Those layers should stay inside each game repo until a truly neutral cross-game contract exists.
 
@@ -60,7 +60,13 @@ The first shared neutral ABI slice now lives under:
 
 - `core/runtime/include/shared_framework/runtime/api/runtime_api.h`
 
-That contract currently covers only generic runtime lifecycle and split-step execution. Game-specific commands, state views, profiling categories, and adapter-facing projections remain game-owned until multiple projects converge on truly shared semantics.
+Additional genuinely neutral helpers now live under:
+
+- `core/host/include/shared_framework/host/adapter_config_loader.h`
+- `core/host/include/shared_framework/host/runtime_bootstrap_dll_loader.h`
+- `engines/godot/include/shared_framework/godot/debug_http_server.h`
+
+Those helpers cover generic adapter-config blob packing, neutral runtime bootstrap symbol loading, and a Godot-side loopback debug HTTP transport. Game-specific commands, state views, profiling categories, adapter-facing projections, and HTTP command semantics remain game-owned until multiple projects converge on truly shared semantics.
 
 When a reusable gameplay system is promoted into the shared framework, it should live under:
 
