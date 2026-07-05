@@ -52,6 +52,18 @@ void SceneDirectorFramework::set_loading_scene_path(const String& path)
     loading_scene_path_ = path;
 }
 
+void SceneDirectorFramework::set_loading_progress_bar_path(const NodePath& path)
+{
+    loading_progress_bar_path_ = path;
+    loading_progress_bar_ = nullptr;
+}
+
+void SceneDirectorFramework::set_loading_progress_label_path(const NodePath& path)
+{
+    loading_progress_label_path_ = path;
+    loading_progress_label_ = nullptr;
+}
+
 void SceneDirectorFramework::set_loading_reveal_delay_frames(const int frames) noexcept
 {
     loading_reveal_delay_frames_ = std::max(0, frames);
@@ -314,13 +326,13 @@ void SceneDirectorFramework::cache_loading_scene_nodes()
 
     if (loading_progress_bar_ == nullptr)
     {
-        loading_progress_bar_ =
-            Object::cast_to<ProgressBar>(active_scene->find_child("ProgressBar", true, false));
+        loading_progress_bar_ = Object::cast_to<ProgressBar>(
+            active_scene->get_node_or_null(loading_progress_bar_path_));
     }
     if (loading_progress_label_ == nullptr)
     {
-        loading_progress_label_ =
-            Object::cast_to<Label>(active_scene->find_child("ProgressLabel", true, false));
+        loading_progress_label_ = Object::cast_to<Label>(
+            active_scene->get_node_or_null(loading_progress_label_path_));
     }
 }
 

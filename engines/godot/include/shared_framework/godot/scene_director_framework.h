@@ -35,6 +35,12 @@ public:
     void set_loading_scene_path(const ::godot::String& path);
     [[nodiscard]] const ::godot::String& loading_scene_path() const noexcept { return loading_scene_path_; }
 
+    void set_loading_progress_bar_path(const ::godot::NodePath& path);
+    [[nodiscard]] const ::godot::NodePath& loading_progress_bar_path() const noexcept { return loading_progress_bar_path_; }
+
+    void set_loading_progress_label_path(const ::godot::NodePath& path);
+    [[nodiscard]] const ::godot::NodePath& loading_progress_label_path() const noexcept { return loading_progress_label_path_; }
+
     void set_loading_reveal_delay_frames(int frames) noexcept;
     [[nodiscard]] int loading_reveal_delay_frames() const noexcept { return loading_reveal_delay_frames_; }
 
@@ -79,6 +85,8 @@ private:
 private:
     ::godot::NodePath scene_host_path_ {"SceneHost"};
     ::godot::String loading_scene_path_ {};
+    ::godot::NodePath loading_progress_bar_path_ {"ProgressBar"};
+    ::godot::NodePath loading_progress_label_path_ {"ProgressLabel"};
     int loading_scene_kind_ {-1};
     int loading_reveal_delay_frames_ {0};
 
