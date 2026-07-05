@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace shared_framework::host {
+namespace shared_framework::godot {
 using RuntimeHostHandle = void;
 
 struct RuntimeBootstrapApi final
@@ -49,4 +49,4 @@ private:
     std::string last_error_ {};
 };
 
-}  // namespace shared_framework::host
+}  // namespace shared_framework::godot

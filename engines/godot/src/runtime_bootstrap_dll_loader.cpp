@@ -1,4 +1,4 @@
-#include "shared_framework/host/runtime_bootstrap_dll_loader.h"
+#include "shared_framework/godot/runtime_bootstrap_dll_loader.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
@@ -64,7 +64,7 @@ std::string win32_error_message(DWORD error_code)
 }
 }  // namespace
 
-namespace shared_framework::host {
+namespace shared_framework::godot {
 
 RuntimeBootstrapDllLoader::~RuntimeBootstrapDllLoader() noexcept
 {
@@ -140,4 +140,4 @@ bool RuntimeBootstrapDllLoader::load_symbol(FunctionPointer& out_function, const
     return true;
 }
 
-}  // namespace shared_framework::host
+}  // namespace shared_framework::godot
