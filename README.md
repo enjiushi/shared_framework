@@ -65,8 +65,11 @@ Additional genuinely neutral helpers now live under:
 - `core/host/include/shared_framework/host/adapter_config_loader.h`
 - `core/host/include/shared_framework/host/runtime_bootstrap_dll_loader.h`
 - `engines/godot/include/shared_framework/godot/debug_http_server.h`
+- `engines/godot/include/shared_framework/godot/controller_context.h`
+- `engines/godot/include/shared_framework/godot/scene_director_policy.h`
+- `engines/godot/include/shared_framework/godot/scene_director_framework.h`
 
-Those helpers cover generic adapter-config blob packing, neutral runtime bootstrap symbol loading, and a Godot-side loopback debug HTTP transport. Game-specific commands, state views, profiling categories, adapter-facing projections, and HTTP command semantics remain game-owned until multiple projects converge on truly shared semantics.
+Those helpers cover generic adapter-config blob packing, neutral runtime bootstrap symbol loading, Godot-side loopback debug HTTP transport, generic controller-tree lookup, and reusable scene-hosting/async-load director scaffolding. Game-specific commands, state views, profiling categories, app-state routing, adapter-facing projections, preload catalogs, and HTTP command semantics remain game-owned until multiple projects converge on truly shared semantics.
 
 When a reusable gameplay system is promoted into the shared framework, it should live under:
 
