@@ -1,5 +1,7 @@
 # Core Host
 
-Engine-free host bridge framework code.
+Reserved for future truly game-neutral host bridge code.
 
-This layer is intended for reusable runtime-loading, runtime-session, and adapter-facing bridge code that should not depend on engine SDK headers.
+The earlier first-pass extraction from GS1 was removed because it still depended on GS1-specific exported gameplay ABI names, gameplay command/state-view types, and host-side assumptions.
+
+Only add code here when it is genuinely reusable across games without requiring one game's public headers or symbol names.

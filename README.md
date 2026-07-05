@@ -7,11 +7,11 @@ Reusable framework code shared across GS-series game projects.
 ```text
 core/
   runtime/
+    api/
     foundation/
     states/
     messages/
     systems/
-  host/
 engines/
   godot/
 ```
@@ -19,8 +19,6 @@ engines/
 ## Dependency Rules
 
 - `core/runtime/` must remain engine-free.
-- `core/host/` must remain engine-free.
-- `engines/godot/` may depend on Godot headers and `godot-cpp`.
 - The framework repo does not own `godot-cpp` by default.
 - Each game repo chooses and pins its own `godot-cpp` dependency version.
 
@@ -45,6 +43,24 @@ The shared framework should own those mechanisms, while each game repo still def
 - concrete systems
 - concrete message payload catalog
 - concrete state descriptor catalog
+
+## Current Scope Boundary
+
+The shared framework currently owns only genuinely reusable runtime infrastructure.
+
+It intentionally does not own:
+
+- any game-specific exported gameplay ABI
+- any game-specific host bridge or DLL session wrapper
+- any game-specific Godot adapter, notification schema, or projection contract
+
+Earlier GS1-derived host and Godot extractions were removed after it became clear they still encoded GS1-specific gameplay commands, state views, DLL names, resource paths, and presentation contracts. Those layers should stay inside each game repo until a truly neutral cross-game contract exists.
+
+The first shared neutral ABI slice now lives under:
+
+- `core/runtime/include/shared_framework/runtime/api/runtime_api.h`
+
+That contract currently covers only generic runtime lifecycle and split-step execution. Game-specific commands, state views, profiling categories, and adapter-facing projections remain game-owned until multiple projects converge on truly shared semantics.
 
 When a reusable gameplay system is promoted into the shared framework, it should live under:
 
